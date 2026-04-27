@@ -21,7 +21,7 @@ from game    import (
 pygame.init()
 pygame.display.set_caption("Snake")
 
-# ── ИНИЦИАЛИЗАЦИЯ БД ─────────────────────────────────────────────────────────
+#БД
 
 try:
     init_db()
@@ -61,12 +61,9 @@ def get_hovered(buttons, mouse_pos):
             return label
     return None
 
-# ── ЭКРАН: ГЛАВНОЕ МЕНЮ ──────────────────────────────────────────────────────
+# ЭКРАН: ГЛАВНОЕ МЕНЮ
 
 def screen_main_menu(settings):
-    """
-    Возвращает ("play", username) | ("leaderboard",) | ("settings",) | ("quit",)
-    """
     username    = ""
     typing      = True          # режим ввода имени
     input_active = True
@@ -146,9 +143,6 @@ def screen_main_menu(settings):
 # ── ЭКРАН: GAMEPLAY ───────────────────────────────────────────────────────────
 
 def screen_gameplay(username, settings):
-    """
-    Возвращает ("game_over", score, level) | ("menu",)
-    """
     personal_best = 0
     if DB_OK:
         try:
@@ -270,12 +264,9 @@ def screen_gameplay(username, settings):
         pygame.display.flip()
         clock.tick(state["fps"])
 
-# ── ЭКРАН: GAME OVER ─────────────────────────────────────────────────────────
+#ЭКРАН: GAME OVER 
 
 def screen_game_over(username, score, level, settings):
-    """
-    Возвращает "retry" | "menu"
-    """
     personal_best = 0
     if DB_OK:
         try:
@@ -317,7 +308,7 @@ def screen_game_over(username, score, level, settings):
         pygame.display.flip()
         clock.tick(30)
 
-# ── ЭКРАН: ЛИДЕРБОРД ─────────────────────────────────────────────────────────
+#ЭКРАН: ЛИДЕРБОРД
 
 def screen_leaderboard():
     rows = []
@@ -379,7 +370,7 @@ def screen_leaderboard():
         pygame.display.flip()
         clock.tick(30)
 
-# ── ЭКРАН: НАСТРОЙКИ ─────────────────────────────────────────────────────────
+#ЭКРАН: НАСТРОЙКИ
 
 COLOR_OPTIONS = [
     ("Green",   (0,   200, 0)),
@@ -391,7 +382,6 @@ COLOR_OPTIONS = [
 ]
 
 def screen_settings(settings):
-    """Возвращает обновлённый словарь настроек."""
     local = dict(settings)
     back_rect = pygame.Rect(SCREEN_W // 2 - 120, SCREEN_H - 70, 240, 48)
 
@@ -464,7 +454,7 @@ def screen_settings(settings):
         pygame.display.flip()
         clock.tick(30)
 
-# ── ГЛАВНЫЙ ЦИКЛ ПРИЛОЖЕНИЯ ───────────────────────────────────────────────────
+#ГЛАВНЫЙ ЦИКЛ ПРИЛОЖЕНИЯ
 
 def main():
     settings = load_settings()

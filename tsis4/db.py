@@ -9,12 +9,9 @@ DB_CONFIG = {
     "password": "",
 }
 
-# ── подключение ──────────────────────────────────────────────────────────────
-
 def get_connection():
     return psycopg2.connect(**DB_CONFIG)
 
-# ── создание таблиц (вызывается один раз при старте) ─────────────────────────
 
 def init_db():
     sql = """
@@ -36,7 +33,7 @@ def init_db():
             cur.execute(sql)
         conn.commit()
 
-# ── получить или создать игрока ───────────────────────────────────────────────
+# получить или создать игрока 
 
 def get_or_create_player(username: str) -> int:
     """Возвращает player_id."""
@@ -54,7 +51,7 @@ def get_or_create_player(username: str) -> int:
         conn.commit()
     return player_id
 
-# ── сохранить результат сессии ────────────────────────────────────────────────
+#сохранить 
 
 def save_session(username: str, score: int, level_reached: int):
     player_id = get_or_create_player(username)
@@ -69,7 +66,7 @@ def save_session(username: str, score: int, level_reached: int):
             )
         conn.commit()
 
-# ── топ-10 всех времён ────────────────────────────────────────────────────────
+# топ-10 
 
 def get_top10():
     """
@@ -103,7 +100,7 @@ def get_top10():
         })
     return result
 
-# ── личный рекорд игрока ──────────────────────────────────────────────────────
+# личный рекорд игрока
 
 def get_personal_best(username: str) -> int:
     """Возвращает лучший счёт игрока или 0 если игрока нет."""
